@@ -31,6 +31,13 @@ void Reset()
 	ballVelocity = { (server ? 100.0f : -100.0f), 60.0f };
 }
 void Load() {
+	// Load font-face from res dir
+	font.loadFromFile("res/fonts/BebasNeue Regular.ttf");
+	// Set text element to use font
+	text.setFont(font);
+	// set the character size to 24 pixels
+	text.setCharacterSize(24);
+
 	// Set size and origin of paddles
 	for (auto &p : paddles) {
 		p.setSize(paddleSize - Vector2f(3, 3));
