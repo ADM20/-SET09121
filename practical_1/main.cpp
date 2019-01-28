@@ -14,7 +14,10 @@ const float ballRadius = 10.f;
 const int gameWidth = 800;
 const int gameHeight = 600;
 const float paddleSpeed = 400.f;
-
+Text text;
+Font font;
+int p1score = 0;
+int p2score = 0;
 Vector2f ballVelocity;
 bool server = false;
 
@@ -29,14 +32,20 @@ void Reset()
 	ball.setPosition(gameWidth / 2, gameHeight / 2);
 	//ball velocity
 	ballVelocity = { (server ? 100.0f : -100.0f), 60.0f };
+	// Update Score Text
+	string sscore = to_string(p1score) + " : " + to_string(p2score);
+	text.setString(sscore);
+	// Keep Score Text Centered
+	text.setPosition((gameWidth * .5f) - (text.getLocalBounds().width * .5f), 0);
 }
 void Load() {
+	
 	// Load font-face from res dir
 	font.loadFromFile("res/fonts/BebasNeue Regular.ttf");
 	// Set text element to use font
 	text.setFont(font);
 	// set the character size to 24 pixels
-	text.setCharacterSize(24);
+	text.setCharacterSize(68);
 
 	// Set size and origin of paddles
 	for (auto &p : paddles) {
@@ -108,11 +117,13 @@ void Update(RenderWindow &window)
 	}
 	else if (bx > gameWidth) {
 		// right wall
+		p1score += 1;
 		server = true;
 		Reset();
 	}
 	else if (bx < 0) {
 		// left wall
+		p2score += 1;
 		server = false;
 		Reset();
 	}
@@ -137,6 +148,7 @@ void Update(RenderWindow &window)
 
 void Render(RenderWindow &window) {
 	// Draw Everything
+	window.draw(text);
 	window.draw(paddles[0]);
 	window.draw(paddles[1]);
 	window.draw(ball);

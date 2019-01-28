@@ -24,14 +24,35 @@ add_executable(PRACTICAL_1 ${SOURCES})
 target_include_directories(PRACTICAL_1 PRIVATE ${SFML_INCS})
 target_link_libraries(PRACTICAL_1 sfml-graphics)
 add_dependencies(PRACTICAL_1 copy_resources)
-### something ###
-set_target_properties(PRACTICAL_1 
-    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
-)
+set_target_properties(PRACTICAL_1 PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration))
+
+## Space invaders
+file(GLOB_RECURSE SOURCES practical_2/*.cpp practical_2/*.h)
+add_executable(PRACTICAL_2 ${SOURCES})
+target_include_directories(PRACTICAL_2 SYSTEM PRIVATE ${SFML_INCS})
+set(EXECUTABLES ${EXECUTABLES} PRACTICAL_2)
+
+
 ### Resources ###
-add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
-  -E copy_directory
-    "${PROJECT_SOURCE_DIR}/res"
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
-)
+add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/res" ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res)
+
+#### Link Dependencies ####
+foreach (exe ${EXECUTABLES})
+  #Set working directory to build dir in visual studio
+  set_target_properties(${exe} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+  )
+
+  #Add all SFML libs.
+  target_link_libraries(${exe}
+    #lib_maths # We'll make this later.
+    optimized sfml-graphics debug sfml-graphics-d
+    optimized sfml-audio debug sfml-audio-d
+    optimized sfml-window debug sfml-window-d
+    optimized sfml-system debug sfml-system-d
+    optimized sfml-graphics debug sfml-graphics-d
+    optimized sfml-main
+  )
+
+  add_dependencies(${exe} sfml-graphics sfml-audio copy_resources)
+endforeach ()
