@@ -1,25 +1,22 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
+//headers
+#include "ship.h"
+#include "game.h"
 //namespaces
 using namespace sf;
 using namespace std;
-
-//variables
-const int gameWidth = 800;
-const int gameHeight = 600;
-
 //fonts
 Font font;
 Text text;
-Color red = Color::Green;
-Color black = Color::Blue;
-
+Color red = Color::Transparent;
+Color black(0,28,255,100);
 //sprites
 Texture spritesheet;
-Sprite invader;
 
+vector<Ship *> ships;
 
-void Load() 
+void Load()
 {
 	//load the things
 
@@ -40,8 +37,17 @@ void Load()
 	if (!spritesheet.loadFromFile("res/img/invaders/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet!" << std::endl;
 	}
-	invader.setTexture(spritesheet);
-	invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
+	for (int r = 0; r < invaders_rows; ++r)
+	{
+		auto rect = IntRect(0 + (r * 32), 0, 32, 32);
+		for (int c = 0; c < invaders_columns; ++c)
+		{
+			Vector2f position = Vector2f((((gameWidth / 2) - ((invaders_columns / 2) *40)) + 16) + (c * 40), 100 + (r * 40));
+			auto inv = new Invader(rect, position);
+			ships.push_back(inv);
+		}
+	}
 }
 
 void Update(RenderWindow &window) 
@@ -63,13 +69,20 @@ void Update(RenderWindow &window)
 		window.close();
 	}
 
+	for (auto &s : ships) {
+		s->Update(dt);
+	};
+
 }
 
 void Render(RenderWindow &window)
 {
-	window.draw(text);
-	window.draw(invader);
 	// Draw Everything
+	window.draw(text);
+
+	for (const auto s : ships) {
+		window.draw(*s);
+	}
 }
 
 int main() {
