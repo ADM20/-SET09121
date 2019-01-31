@@ -38,6 +38,10 @@ void Load()
 		cerr << "Failed to load spritesheet!" << std::endl;
 	}
 
+	auto player = new Player();
+
+	ships.push_back(player);
+
 	for (int r = 0; r < invaders_rows; ++r)
 	{
 		auto rect = IntRect(0 + (r * 32), 0, 32, 32);
