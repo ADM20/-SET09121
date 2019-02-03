@@ -32,6 +32,12 @@ add_executable(PRACTICAL_2 ${SOURCES})
 target_include_directories(PRACTICAL_2 SYSTEM PRIVATE ${SFML_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_2)
 
+## Tile Engine
+file(GLOB_RECURSE SOURCES practical_3/*.cpp practical_3/*.h)
+add_executable(PRACTICAL_3 ${SOURCES})
+target_include_directories(PRACTICAL_3 SYSTEM PRIVATE ${SFML_INCS})
+set(EXECUTABLES ${EXECUTABLES} PRACTICAL_3)
+
 
 ### Resources ###
 add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/res" ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res)
