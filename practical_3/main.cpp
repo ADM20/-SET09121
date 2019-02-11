@@ -19,9 +19,16 @@ void Load()
 
 	ls::loadLevelFile("res/maze_2.txt");
 	// Print the level to the console
-	for (size_t y = 0; y < ls::getHeight(); ++y) {
-		for (size_t x = 0; x < ls::getWidth(); ++x) {
+	for (size_t y = 0; y < ls::getHeight(); ++y)
+	{
+		for (size_t x = 0; x < ls::getWidth(); ++x)
+		{
 			cout << ls::getTile({ x, y });
+			if (ls::getTile({ x,y }) == 1)
+			{
+				Vector2f pos = ls::getTilePosition(sf::Vector2ul(x, y));
+				entity[0]->setPosition(Vector2f(pos.x + 50, pos.y + 50));
+			}
 		}
 		cout << endl;
 	}

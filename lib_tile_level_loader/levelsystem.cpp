@@ -33,7 +33,7 @@ void LevelSystem::setColor(LevelSystem::TILE t, sf::Color c) {
 
 void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 	_tileSize = tileSize;
-	size_t w = 0, h = 0;
+	size_t w = 0, h = 1;
 	string buffer;
 
 	// Load in file to buffer
@@ -109,7 +109,7 @@ void LevelSystem::buildSprites() {
 		}
 	}
 }
-LevelSystem::TILE LevelSystem::getTile(sf::Vector2u p) {
+LevelSystem::TILE LevelSystem::getTile(sf::Vector2ul p) {
 	if (p.x > _width || p.y > _height) {
 		throw string("Tile out of range: ") + to_string(p.x) + "," +
 			to_string(p.y) + ")";
