@@ -2,6 +2,8 @@
 #include "entity.h"
 #include "player.h"
 #include "ghost.h"
+#include "system_renderer.h"
+#include "pacman.h"
 
 using namespace sf;
 using namespace std;
@@ -9,27 +11,18 @@ using namespace std;
 int gameWidth = 1600;
 int gameHeight = 1200;
 
-
-std::vector<Entity*> entities;
-
-void Render(RenderWindow &window)
-{
-	for (Entity* e : entities)
-	{
-		e->render(window);
-	}
-}
+shared_ptr<Scene> gameScene;
+shared_ptr<Scene> menuScene;
+shared_ptr<Scene> activeScene;
 
 void Load()
 {
-	Player *player = new Player();
-	entities.push_back(new Player());
-	entities[entities.size() - 1]->setPosition(sf::Vector2f(400, 350));
-	for (int i = 0; i < 4; i++)
-	{
-		entities.push_back(new Ghost());
-		entities[entities.size() - 1]->setPosition(sf::Vector2f(200 + (i * 100), 250));
-	}
+	gameScene.reset(new GameScene());
+	menuScene.reset(new MenuScene());
+	gameScene->load();
+	menuScene->load();
+	// Start at main menu
+	activeScene = menuScene;
 }
 
 void Update(RenderWindow &window)
@@ -52,10 +45,13 @@ void Update(RenderWindow &window)
 		window.close();
 	}
 	
-	for (Entity* e : entities)
-	{
-		e->update(dt);
-	}
+	activeScene->update(dt);
+}
+void Render(RenderWindow &window)
+{
+	Renderer::initialise(window);
+	activeScene->render();
+	Renderer::render();
 }
 
 int main()

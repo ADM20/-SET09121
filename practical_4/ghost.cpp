@@ -2,19 +2,12 @@
 using namespace std;
 using namespace sf;
 
-int Ghost::amount = 0;
-std::vector<sf::Color> Ghost::_colours = { Color::Blue, Color::Red, Color(255,179,220), Color(255,158,69) };
 
-
-Ghost::Ghost() : _speed(200.0f), _g_id(amount), Entity(make_unique<CircleShape>(25.0f))
+// Constructor
+Ghost::Ghost(sf::Color c) : _speed(200.0f), Entity(std::make_unique<sf::CircleShape>(25.0f))
 {
-	_shape->setFillColor(_colours[_g_id]);
-	_shape->setOrigin(Vector2f(25.0f, 25.0f));
-	amount++;
-	if (amount == 4)
-	{
-		amount = 0;
-	}
+	_shape->setFillColor(c);
+	_shape->setOrigin(sf::Vector2f(25.0f, 25.0f));
 }
 
 void Ghost::update(double dt)
