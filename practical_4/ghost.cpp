@@ -1,4 +1,4 @@
-#include "Ghost.h"
+#include "ghost.h"
 using namespace std;
 using namespace sf;
 
@@ -18,7 +18,7 @@ Ghost::Ghost() : _speed(200.0f), _g_id(amount), Entity(make_unique<CircleShape>(
 
 void Ghost::update(double dt)
 {
-
+	Entity::update(dt);
 }
 
 void Ghost::render(sf::RenderWindow &window) const

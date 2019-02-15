@@ -6,8 +6,8 @@
 using namespace sf;
 using namespace std;
 
-int gameWidth = 800;
-int gameHeight = 600;
+int gameWidth = 1600;
+int gameHeight = 1200;
 
 
 std::vector<Entity*> entities;

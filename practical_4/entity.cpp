@@ -1,5 +1,5 @@
 
-#include "Entity.h"
+#include "entity.h"
 #include "levelsystem.h"
 using namespace std;
 using namespace sf;
@@ -8,7 +8,8 @@ bool Entity::validmove(Vector2f pos)
 {
 	return (ls::getTileAt(pos) != ls::WALL);
 }
- 
+void Entity::move(const Vector2f &pos) { _position += pos; }
+
 const Vector2f Entity::getPosition() { return _position;  }
 void Entity::setPosition(const Vector2f &pos) { _position = pos; }
 void Entity::update(const double dt)
