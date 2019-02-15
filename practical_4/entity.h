@@ -1,9 +1,8 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 #include <memory>
 using namespace sf;
-
+using namespace std;
 class Entity
 {
 protected:
@@ -21,4 +20,11 @@ public:
 	const sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f &pos);
 	void move(const sf::Vector2f &pos);
+};
+
+struct EntityManager
+{
+	vector<shared_ptr<Entity>> list;
+	void update(double dt);
+	void render(RenderWindow &window);
 };
