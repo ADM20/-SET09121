@@ -30,37 +30,37 @@ add_subdirectory("lib/b2d/Box2D")
 set(B2D_INCS "lib/b2d/Box2D/")
 #link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
-#### PONG ####
+#### practical_1 ####
 file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
 add_executable(PRACTICAL_1 ${SOURCES})
 target_include_directories(PRACTICAL_1 PRIVATE ${SFML_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_1)
 
-#### SPACE INVADERS ####
+#### practical_2 ####
 file(GLOB_RECURSE SOURCES practical_2/*.cpp practical_2/*.h)
 add_executable(PRACTICAL_2 ${SOURCES})
 target_include_directories(PRACTICAL_2 SYSTEM PRIVATE ${SFML_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_2)
 
-#### TILE ENGINES ####
+#### practical_3 ####
 file(GLOB_RECURSE SOURCES practical_3/*.cpp practical_3/*.h)
 add_executable(PRACTICAL_3 ${SOURCES})
 target_include_directories(PRACTICAL_3 SYSTEM PRIVATE ${SFML_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_3)
 
-#### PACMAN ####
+#### practical_4####
 file(GLOB_RECURSE SOURCES practical_4/*.cpp practical_4/*.h)
 add_executable(PRACTICAL_4 ${SOURCES})
 target_include_directories(PRACTICAL_4 SYSTEM PRIVATE ${SFML_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_4)
 
-### PHYSICS ###
+### practical_5###
 file(GLOB_RECURSE SOURCES practical_5/*.cpp practical_5/*.h)
 add_executable(PRACTICAL_5 ${SOURCES})
 target_include_directories(PRACTICAL_5 SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_5)
 
-### PLATFORMER ###
+### practical_6###
 file(GLOB_RECURSE SOURCES practical_6/*.cpp practical_6/*.h)
 file(GLOB_RECURSE CMPNTS practical_6/components/*.cpp practical_6/components/*.h)
 file(GLOB_RECURSE SCENES practical_6/scenes/*.cpp practical_6/scenes/*.h)
@@ -69,6 +69,17 @@ source_group("components" FILES ${CMPNTS})
 source_group("resources" FILES ${RESOURCE_FILES})
 target_include_directories(PRACTICAL_6 SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_6)
+
+### practical_7 ###
+file(GLOB_RECURSE SOURCES practical_7/*.cpp practical_7/*.h)
+file(GLOB_RECURSE CMPNTS practical_7/components/*.cpp practical_7/components/*.h)
+file(GLOB_RECURSE SCENES practical_7/scenes/*.cpp practical_7/scenes/*.h)
+add_executable(PRACTICAL_7 ${SOURCES} ${CMPNTS} ${SCENES} ${RESOURCE_FILES})
+source_group("components" FILES ${CMPNTS})
+source_group("resources" FILES ${RESOURCE_FILES})
+target_include_directories(PRACTICAL_7 SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
+target_link_libraries(PRACTICAL_7 lib_engine)
+set(EXECUTABLES ${EXECUTABLES} PRACTICAL_7)
 
 #### LINK DEPENDENCIES ####
 foreach(exe ${EXECUTABLES})
