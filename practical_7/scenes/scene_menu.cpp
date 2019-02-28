@@ -7,21 +7,26 @@
 using namespace std;
 using namespace sf;
 
-void MenuScene::Load() {
+void MenuScene::Load() 
+{
   cout << "Menu Load \n";
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>(
-        "Platformer\nPress Space to Start");
+        "Movement Demos\nPress 1 for Steering\nPress 2 for Pathfinding");
   }
   setLoaded(true);
 }
 
-void MenuScene::Update(const double& dt) {
-  // cout << "Menu Update "<<dt<<"\n";
-
-  if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
+void MenuScene::Update(const double& dt) 
+{
+  if (sf::Keyboard::isKeyPressed(Keyboard::Num1)) 
+  {
     Engine::ChangeScene(&level1);
+  }
+  else if (sf::Keyboard::isKeyPressed(Keyboard::Num2))
+  {
+	Engine::ChangeScene(&level2);
   }
 
   Scene::Update(dt);
