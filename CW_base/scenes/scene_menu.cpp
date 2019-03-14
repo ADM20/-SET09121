@@ -18,13 +18,16 @@ void MenuScene::Load()
   setLoaded(true);
 }
 
-void MenuScene::Update(const double &dt) {
-	if (sf::Keyboard::isKeyPressed(Keyboard::Num1)) {
-		// New line
-		Engine::ChangeScene(&steeringScene);
-	}
-	else if (sf::Keyboard::isKeyPressed(Keyboard::Num2)) {
+void MenuScene::Update(const double& dt) 
+{
+  if (sf::Keyboard::isKeyPressed(Keyboard::Num1)) 
+  {
+    Engine::ChangeScene(&level1);
+  }
+  else if (sf::Keyboard::isKeyPressed(Keyboard::Num2))
+  {
+	Engine::ChangeScene(&level2);
+  }
 
-	}
-	Scene::Update(dt);
+  Scene::Update(dt);
 }
