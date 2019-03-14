@@ -24,7 +24,7 @@ void MenuScene::Update(const double &dt) {
 		Engine::ChangeScene(&steeringScene);
 	}
 	else if (sf::Keyboard::isKeyPressed(Keyboard::Num2)) {
-
+		Engine::ChangeScene(&pathfindingScene);
 	}
 	Scene::Update(dt);
 }
