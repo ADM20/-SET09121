@@ -81,6 +81,14 @@ target_include_directories(PRACTICAL_7 SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
 target_link_libraries(PRACTICAL_7 lib_engine)
 set(EXECUTABLES ${EXECUTABLES} PRACTICAL_7)
 
+## 8 - Decisions
+file(GLOB_RECURSE SOURCES practical_8/*.cpp practical_8/*.h)
+file(GLOB_RECURSE CMPNTS practical_8/components/*.cpp practical_8/components/*.h)
+file(GLOB_RECURSE SCENES practical_8/scenes/*.cpp practical_8/scenes/*.h)
+add_executable(PRACTICAL_8 ${SOURCES} ${CMPNTS} ${SCENES} ${RESOURCE_FILES})
+target_link_libraries(PRACTICAL_8 lib_engine)
+set(EXECUTABLES ${EXECUTABLES} PRACTICAL_8)
+
 #### LINK DEPENDENCIES ####
 foreach(exe ${EXECUTABLES})
 	#Set working directory to build dir in visual studio
