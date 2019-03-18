@@ -5,4 +5,5 @@
 
 git submodule update --init --recursive
 
-https://ci.appveyor.com/api/projects/status/bpl0guk0e33xi4as?svg=true
+[![Build status](https://ci.appveyor.com/api/projects/status/bpl0guk0e33xi4as?svg=true)](https://ci.appveyor.com/project/ADM20/set09121)
+
