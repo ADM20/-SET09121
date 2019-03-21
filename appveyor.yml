@@ -27,7 +27,7 @@ build:
 after_build:
 - cmd: >-
 
-    7z a Astral_Insanity_%CONFIGURATION%_win64.zip %APPVEYOR_BUILD_FOLDER%/build/bin/%CONFIGURATION%/Astral_Insanity_main.exe %APPVEYOR_BUILD_FOLDER%/build/bin/%CONFIGURATION%/*.dll  %APPVEYOR_BUILD_FOLDER%/build/bin/%CONFIGURATION%/**/*
+    7z a games_engineering_labs_%CONFIGURATION%_win64.zip %APPVEYOR_BUILD_FOLDER%/build/bin/%CONFIGURATION%/games_engineering_main.exe %APPVEYOR_BUILD_FOLDER%/build/bin/%CONFIGURATION%/*.dll  %APPVEYOR_BUILD_FOLDER%/build/bin/%CONFIGURATION%/**/*
     
     cd ../build/installer/
     
@@ -39,9 +39,9 @@ after_build:
     
 artifacts:
   - path: build/*.zip
-    name: Astral_Insanity_zip
+    name: games_engineering_labs_zip
   - path: build/installer/*.exe
-    name: Astral_Insanity_installer
+    name: games_engineering_labs
     
 deploy:
 - provider: GitHub
@@ -50,5 +50,5 @@ deploy:
     CONFIGURATION: Release
   auth_token:
     secure: ECVq3ge/gI4xSJEeoXNUiE3fq0samUls/hSKmaGeJmk3CAxEqr02LX2tcVenpINm
-  artifact: Astral_Insanity_installer, Astral_Insanity_zip
+  artifact: games_engineering_labs, games_engineering_labs_zip
   prerelease: true
